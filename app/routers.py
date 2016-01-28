@@ -2,17 +2,15 @@
 from app import app
 #render_template gives you access to Jinja2 template
 from flask import render_template, request, make_response
+from app.forms import LoginForm
 
 #This is comment also, but you can use # only in one line comments
 
-@app.route('/')
+#Router must always return something
+@app.route('/',methods=['GET','POST'])
 def index():
-    name = 'Aku'
-    address = 'Ankkalinna'
-    response = make_response(render_template('template_index.html', title=address, name=name))
-    response.headers.add('Cache-control','no-cache')
-    response.headers.add('diipadaapa','jippii')
-    return response
+    login = LoginForm()
+    return render_template('template_index.html', form=login)
 
 @app.route('/user/<name>')
 def user(name):
