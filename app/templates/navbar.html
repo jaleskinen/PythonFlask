@@ -11,8 +11,13 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Login</a></li>
-                <li><a href="/register">Register</a></li>
+                {% if islogged == False %}
+                    <li><a href="/register">Register</a></li>
+                {% else %}
+                <!--<li><a href="/friends">Friends</a></li>-->
+                <li><a href="/addfriends">Add Friend</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

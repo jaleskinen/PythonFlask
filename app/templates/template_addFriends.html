@@ -2,33 +2,23 @@
 {% block title %}AddFriends {{super()}}{% endblock %}
 {% block head %}
     {{super()}}
-    <style>
-        .my_container{
-            width: 800px;
-            margin: 30px auto;
-            padding: 8px;
-            border: 2px solid grey;
-            border-radius: 5px;
-            background-color: beige;
-        }
-    </style>
 {% endblock %}
 {% block navbar %}{{super()}}{% endblock %}
 {% block body %}
     {# call super() if you want to include code from base.html template #}
     {{super()}}
-    <h1 style="margin: 30px auto;width: 800px;padding: 8px;">Add new Friend - {{user}}</h1>
+    <h1 style="margin: 30px auto;width: 800px;padding: 8px;">Add new Friend</h1>
     <div class="my_container">
         <form action="/addfriends" method="POST">
             {{ form.csrf_token }}
             {{ form.name.label }}
-            {{ form.name(class="form-control",id="name") }}
+            {{ form.name(class="form-control") }}
             
             {{ form.address.label }}
-            {{ form.address(class="form-control",id="address") }}
+            {{ form.address(class="form-control") }}
             
             {{ form.age.label }}
-            {{ form.age(class="form-control",id="age") }}
+            {{ form.age(class="form-control") }}
             
             {{ form.submit(class='btn btn-primary') }}
         </form>

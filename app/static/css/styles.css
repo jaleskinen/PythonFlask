@@ -5,3 +5,12 @@ html body{
     min-width: 100%;
     background-color: beige;
 }
+
+.my_container{
+            width: 800px;
+            margin: 30px auto;
+            padding: 8px;
+            border: 2px solid grey;
+            border-radius: 5px;
+            background-color: beige;
+        }
