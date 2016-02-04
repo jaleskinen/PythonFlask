@@ -14,4 +14,12 @@ bootstrap = Bootstrap(app)
 #login_manager.login_view = 'root'
 
 db = SQLAlchemy(app)
+
+from blueprint.ud.ud_blueprint import ud
+from blueprint.auth.auth_blueprint import auth
+#Register all needed blueprints
+app.register_blueprint(ud)
+app.register_blueprint(auth)
+
+
 from app import routers

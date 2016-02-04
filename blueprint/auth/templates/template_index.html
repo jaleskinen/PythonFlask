@@ -1,0 +1,30 @@
+{# In this file all variables inside{{}} will be replaced  #}
+{# by Jinja2 template engine with actual data  #}
+
+{% extends 'base.html' %}
+{% block title %}Login{{super()}}{% endblock %}
+{% block head %}
+    {{super()}}
+    <style>
+        .my_container{
+            width: 500px;
+        }
+    </style>
+{% endblock %}
+{% block navbar %}{{super()}}{% endblock %}
+{% block body %}
+    {# call super() if you want to include code from base.html template #}
+    {{super()}}
+    <div class="my_container">
+        <form action="/" method="POST">
+            {{ form.csrf_token }}
+            {{ form.email.label }}
+            {{ form.email(class="form-control",id="email") }}
+            
+            {{ form.passw.label }}
+            {{ form.passw(class="form-control",id="password") }}
+            
+            {{ form.submit(class='btn btn-primary') }}
+        </form>
+    </div>
+{% endblock %}

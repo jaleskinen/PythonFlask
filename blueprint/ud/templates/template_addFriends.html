@@ -9,7 +9,7 @@
     {{super()}}
     <h1 style="margin: 30px auto;width: 800px;padding: 8px;">Add new Friend</h1>
     <div class="my_container">
-        <form action="/addfriends" method="POST">
+        <form action="/app/addfriends" method="POST">
             {{ form.csrf_token }}
             {{ form.name.label }}
             {{ form.name(class="form-control") }}
@@ -19,8 +19,9 @@
             
             {{ form.age.label }}
             {{ form.age(class="form-control") }}
-            
+            <br>
             {{ form.submit(class='btn btn-primary') }}
+            <input Type="submit" class='btn btn-primary' value="Cancel" onClick="history.go(-1);return true;">
         </form>
     </div>
 {% endblock %}
