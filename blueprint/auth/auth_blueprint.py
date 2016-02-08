@@ -1,7 +1,7 @@
 from flask import Blueprint, session, redirect,request,render_template,flash,url_for
 from app.forms import LoginForm, RegisterForm
-from app.db_models import db
 from app.db_models import Users, Friends
+from app import db
 from flask.ext.bcrypt import check_password_hash
 
 #Create Blueprint
@@ -10,9 +10,13 @@ from flask.ext.bcrypt import check_password_hash
 #Third parameter tells what folder contains our templates
 auth = Blueprint('auth',__name__,template_folder='templates')
 
+@auth.route('/index/<int:page>',methods=['GET','POST'])
 @auth.route('/',methods=['GET','POST'])
-def index():
+def index(page=1):
     login = LoginForm()
+    if request.method == 'GET' and 'user_id' in session:
+        friends = Friends.query.filter_by(user_id=session['user_id']).paginate(page,10,False)
+        return render_template('template_friends.html',isLogged=True,friends=friends)
     #Check if GET method
     if request.method == 'GET':
         #print('login render_template template_index.html')
@@ -20,21 +24,18 @@ def index():
     else:
         #Check if form data is valid
         if login.validate_on_submit():
-            #print('login: ' + login.email.data)
             #Check if correct username
             user = Users.query.filter_by(email=login.email.data)
             #print('user')
-            #print(user[0])
-            #print(user)
             if (user.count() == 1) and (check_password_hash(user[0].passw,login.passw.data)):
                 #login_user(user.one())
                 session['user_id'] = user[0].id
-                session['user_email'] = user[0].email
+                #session['user_email'] = user[0].email
                 session['islogged'] = True
                 #Hae ystävät, tapa 1
-                allfriends = Friends.query.filter_by(user_id=user[0].id)
+                friends = Friends.query.filter_by(user_id=user[0].id).paginate(page,10,False)
                 #print(allFriends)
-                return render_template('template_friends.html', islogged=True, allfriends=allfriends)
+                return render_template('template_friends.html', islogged=True, friends=friends)
                 #return redirect('/friends')
             else:
                 flash('Wrong username or password')

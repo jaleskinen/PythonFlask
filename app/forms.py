@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, PasswordField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField,FileField
 from wtforms.validators import Required, Email, NumberRange
 
 class LoginForm(Form):
@@ -17,4 +17,5 @@ class FriendsForm(Form):
     address = StringField('Give  Friend Address',validators=[Required()])
     age =  IntegerField('Give Friend Age',validators=[Required(),NumberRange(min=0,max=115,message="Enter age between 0-115")])
     #user_id =  IntegerField('User Id')
+    upload_file = FileField()
     submit = SubmitField('Save')
