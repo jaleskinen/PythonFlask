@@ -35,7 +35,7 @@ def addFriend():
         return render_template('template_addFriends.html', form=form, islogged=True)
     else:
         if form.validate_on_submit():
-            temp = Friends(form.name.data, form.address.data, form.age.data,session['user_id'])
+            temp = Friends(form.name.data, form.address.data, form.age.data, session['user_id'])
             #Save the image if present
             if form.upload_file.data:
                 filename = secure_filename(form.upload_file.data.filename)

@@ -22,4 +22,4 @@ app.register_blueprint(ud)
 app.register_blueprint(auth)
 
 
-from app import routers
+#from app import routers
